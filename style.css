@@ -1,0 +1,340 @@
+/* ==========================================================
+   SITE: PILHAS E BATERIAS
+   Paleta: #f4a942  #f7b74f  #fac45d  #fcd26a  #ffdf77
+   ========================================================== */
+
+:root {
+    --amarelo-1: #f4a942;   /* mais forte: menu, títulos dos acordeões, botões */
+    --amarelo-2: #f7b74f;   /* cabeçalho, hover */
+    --amarelo-3: #fac45d;   /* bordas, detalhes */
+    --amarelo-4: #fcd26a;   /* fundos de destaque */
+    --amarelo-5: #ffdf77;   /* mais claro: fundo da área principal */
+
+    /* Todas as cores da paleta são claras, então o texto precisa de um tom escuro.
+       Estes dois marrons foram acrescentados só para dar contraste. */
+    --texto: #3b2a0a;       /* texto principal */
+    --texto-2: #7a4a05;     /* subtítulos e bordas de botões */
+
+    --fundo: #fffaeb;       /* tom bem claro derivado da paleta */
+    --branco: #ffffff;
+
+    --primary-color: var(--amarelo-1);
+    --accent-color: var(--amarelo-2);
+    --text-dark: var(--texto);
+    --border-radius: 8px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--fundo);
+    color: var(--texto);
+    text-align: center;
+}
+
+p {
+    line-height: 1.6;
+    color: var(--texto);
+}
+
+/* ---------- Menu ---------- */
+nav {
+    background-color: var(--amarelo-1);
+    padding: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    text-align: center;
+}
+
+nav a {
+    color: var(--texto);
+    text-decoration: none;
+    margin: 0 12px;
+    font-weight: bold;
+    display: inline-block;
+    padding: 4px 0;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- Cabeçalho (página inicial) ---------- */
+header {
+    background-color: var(--amarelo-2);
+    color: var(--texto);
+    padding: 30px 20px;
+}
+
+header h1 {
+    margin: 0 0 20px;
+    font-size: 42px;
+}
+
+header h2,
+header p {
+    color: var(--texto);
+}
+
+/* ---------- Conteúdo principal ---------- */
+main {
+    width: 90%;
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 10px 20px;
+    background-color: var(--amarelo-5);
+    border-radius: 30px;
+}
+
+section {
+    background-color: var(--branco);
+    margin: 20px 0;
+    padding: 30px;
+    border-radius: 24px;
+}
+
+section h2 {
+    color: var(--texto);
+    border-bottom: 3px solid var(--amarelo-1);
+    padding-bottom: 10px;
+}
+
+h3 { color: var(--texto-2); }
+
+/* ---------- Destaque com texto (e imagem, se houver) ---------- */
+.destaque-inicio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    text-align: left;
+    margin: 20px auto;
+}
+
+.destaque-inicio img {
+    width: 430px;
+    max-width: 48%;
+    height: auto;
+    border-radius: var(--border-radius);
+}
+
+.texto-destaque { flex: 1; }
+
+/* ---------- Acordeão ---------- */
+.acordeao {
+    margin: 12px 0;
+    border: 2px solid var(--amarelo-1);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    text-align: left;
+}
+
+.titulo-acordeao {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    border: none;
+    background-color: var(--amarelo-1);
+    color: var(--texto);
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: left;
+    cursor: pointer;
+}
+
+.titulo-acordeao:hover { background-color: var(--amarelo-2); }
+
+.titulo-acordeao span { font-size: 22px; }
+
+.conteudo-acordeao {
+    display: none;               /* o script.js alterna para block */
+    padding: 10px 20px 16px;
+    background-color: var(--fundo);
+}
+
+/* ---------- Quiz ---------- */
+#quiz-container { margin-top: 20px; }
+
+#progresso {
+    font-weight: bold;
+    color: var(--texto-2);
+}
+
+#alternativas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+#alternativas button {
+    padding: 12px;
+    border: 2px solid var(--texto-2);
+    border-radius: 6px;
+    background-color: var(--branco);
+    color: var(--texto);
+    cursor: pointer;
+    text-align: left;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+#alternativas button:hover:not(:disabled) { background-color: var(--amarelo-4); }
+
+/* acerto: fundo escuro + ✓  |  erro: fundo claro tracejado + ✗ (não depende só da cor) */
+#alternativas button.correta {
+    background-color: var(--texto);
+    border-color: var(--texto);
+    color: var(--amarelo-5);
+}
+
+#alternativas button.correta::before { content: "✓ "; font-weight: bold; }
+
+#alternativas button.errada {
+    background-color: var(--amarelo-4);
+    border-color: var(--texto);
+    border-style: dashed;
+    color: var(--texto);
+}
+
+#alternativas button.errada::before { content: "✗ "; font-weight: bold; }
+
+#alternativas button:disabled { cursor: default; }
+
+#feedback {
+    margin-top: 15px;
+    padding: 12px;
+    background-color: var(--fundo);
+    border-left: 4px solid var(--amarelo-1);
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    color: var(--texto);
+}
+
+#feedback:empty { display: none; }
+
+#proxima,
+#refazer {
+    background-color: var(--amarelo-1);
+    color: var(--texto);
+    border: 2px solid var(--texto-2);
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+#proxima { display: none; margin: 16px auto 0; }
+#refazer { font-weight: bold; }
+#proxima:hover,
+#refazer:hover { background-color: var(--amarelo-2); }
+
+/* ---------- Rodapé ---------- */
+footer {
+    background-color: var(--texto);
+    color: var(--amarelo-5);
+    padding: 20px;
+    margin-top: 30px;
+    font-size: 14px;
+}
+
+footer p { color: var(--amarelo-5); margin: 6px 0; }
+
+/* ---------- Acessibilidade ---------- */
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--texto);
+    outline-offset: 2px;
+}
+
+/* ---------- Telas pequenas ---------- */
+@media (max-width: 700px) {
+    header h1 { font-size: 30px; }
+    main { width: 96%; padding: 6px 10px; }
+    section { padding: 20px 16px; }
+    .destaque-inicio { flex-direction: column; text-align: center; }
+    .destaque-inicio img { max-width: 100%; }
+}
+#quiz-container { margin-top: 20px; }
+#progresso { font-weight: bold; }
+
+#alternativas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+#alternativas button {
+    padding: 12px;
+    border: 1px solid var(--primary-color);
+    border-radius: 6px;
+    background-color: white;
+    cursor: pointer;
+    text-align: left;
+    font-size: 16px;
+}
+
+#alternativas button:hover { background-color: #e8edf2; }
+
+#alternativas button.correta {
+    background-color: #d4edda;
+    border-color: #2e7d32;
+    color: #1b5e20;
+}
+
+#alternativas button.errada {
+    background-color: #f8d7da;
+    border-color: #c62828;
+    color: #8e0000;
+}
+
+#alternativas button:disabled { cursor: default; }
+
+#feedback {
+    margin-top: 15px;
+    padding: 12px;
+    background-color: #dcecf7;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    color: var(--text-dark);
+}
+
+#proxima, #refazer {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#proxima { display: none; }
+#refazer { font-weight: bold; }
+#proxima:hover, #refazer:hover { background-color: var(--accent-color); }
+
+
+.destaque-inicio img {
+    width: 430px;
+    max-width: 48%;
+    height: auto;
+    border-radius: 8px;
+}
+.texto-espiral {
+     background-color: white;
+    width: 85%;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
